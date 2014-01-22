@@ -7,8 +7,8 @@ __PACKAGE__->columns(All => qw(id user_car_id service_id));
 __PACKAGE__->has_a(user_car_id => 'Auto::User::Car');
 __PACKAGE__->has_a(service_id  => 'Auto::Service');
 
-sub car     { return shift->car_id;     }
-sub service { return shift->service_id; }
+sub user_car { return shift->user_car_id; }
+sub service  { return shift->service_id;  }
 
 sub needed {
   my $class = shift;
@@ -24,12 +24,8 @@ sub needed {
       { order_by => 'mileage' }
     );
 
-    if ($maint) {
-      if ($maint->user_car->mileage - $maint->mileage >= $user_car_service->service->miles) {
-        push(@needed, $user_car_service);
-      }
-    }
-    else {
+    my $maint_mileage = $maint ? $maint->mileage : 0;
+    if ($user_car_service->user_car->mileage - $maint_mileage >= $user_car_service->service->miles) {
       push(@needed, $user_car_service);
     }
   }
