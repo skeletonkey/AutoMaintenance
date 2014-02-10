@@ -2,8 +2,12 @@ Create New Service
 <form method='POST'>
   Name: <input type='text' name='name' value='<!-- NAME -->'><BR>
   Description: <input type='text' name='description' value='<!-- DESCRIPTION -->'><BR>
-  Miles: <input type='text' name='miles' value='<!-- MILES -->'><BR>
-  Months: <input type='text' name='months' value='<!-- MONTHS -->'><BR>
-  <label>Absolute: <input type='checkbox' name='absolute' value=1 <!-- ABSOLUTE_CHECKED --></label><BR>
+  Miles:* <input type='text' name='miles' value='<!-- MILES -->'><BR>
+  Months:* <input type='text' name='months' value='<!-- MONTHS -->'><BR>
+  <label>Absolute:** <input type='checkbox' name='absolute' value=1 <!-- ABSOLUTE_CHECKED --></label><BR>
   <input type='submit' name='submit'>
 </form>
+<div>
+* - Value of 0 means the field will be ignored<BR/>
+** - Means Service only happens once instead of repeating<BR/>
+</div>
