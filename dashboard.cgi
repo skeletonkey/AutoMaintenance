@@ -5,6 +5,7 @@ use Include;
 
 use HTML::Table;
 
+use Auto::Base::HTML::Menu;
 use Auto::Service;
 use Auto::User::Car::Service;
 
@@ -14,7 +15,7 @@ sub dashboard {
   $Template_Tags{BODY} = read_file($CFG{Template_Dir} . "/dashboard.html");
   $Template_Tags{CARS} = get_cars();
   $Template_Tags{LIST} = get_list($CGI_Obj->param('list'));
-  $Template_Tags{MENU} = get_menu();
+  $Template_Tags{MENU} = Auto::Base::HTML::Menu->getMenu();
   
   $Template_Obj->display();
 }
@@ -55,18 +56,4 @@ sub get_cars {
   }
 
   return $ret;
-}
-
-sub get_menu {
-  return <<EOMENU;
-  <ul>
-    Cars:
-    <li><a href='auto_create.cgi'>Create New</a></li>
-    <li><a href='user_car_create.cgi'>Add to Account</a></li>
-    Service:
-    <li><a href='dashboard.cgi?list=service'>List</a></li>
-    <li><a href='service_create.cgi'>Create New</a></li>
-    <li><a href='user_car_service_create.cgi'>Add to Car</a></li>
-  </ul>
-EOMENU
 }

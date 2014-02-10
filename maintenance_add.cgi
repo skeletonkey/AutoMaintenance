@@ -3,6 +3,7 @@
 use strict;
 use Include;
 
+use Auto::Base::HTML::Menu;
 use Auto::Maintenance;
 use Auto::Service;
 use Auto::User::Car;
@@ -45,6 +46,8 @@ sub maintenance_add {
   });
 
   $Template_Tags{BODY} = read_file($CFG{Template_Dir} . "/maintenance_add.html");
+  $Template_Tags{MENU} = Auto::Base::HTML::Menu->getMenu();
+
   Auto::User::Car::Service->populateForm({
     cgi    => $CGI_Obj,
     fields => \@fields,

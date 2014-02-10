@@ -3,6 +3,7 @@
 use strict;
 use Include;
 
+use Auto::Base::HTML::Menu;
 use Auto::Service;
 
 my @fields = qw(name description months miles absolute);
@@ -24,6 +25,8 @@ else {
 
 sub page {
   $Template_Tags{BODY} = read_file($CFG{Template_Dir} . "/service_create.html");
+  $Template_Tags{MENU} = Auto::Base::HTML::Menu->getMenu();
+
   Auto::Car->populateForm({
     cgi    => $CGI_Obj,
     fields => \@fields,

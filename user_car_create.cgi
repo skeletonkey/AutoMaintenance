@@ -3,6 +3,7 @@
 use strict;
 use Include;
 
+use Auto::Base::HTML::Menu;
 use Auto::Car;
 use Auto::User::Car;
 
@@ -24,6 +25,7 @@ sub page {
   $Template_Tags{CARS_LIST} = Auto::Car->getList({
     default => $CGI_Obj->param('car_id') || 0,
   });
+  $Template_Tags{MENU} = Auto::Base::HTML::Menu->getMenu();
   
   $Template_Obj->display();
 }

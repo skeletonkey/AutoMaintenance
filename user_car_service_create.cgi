@@ -3,6 +3,7 @@
 use strict;
 use Include;
 
+use Auto::Base::HTML::Menu;
 use Auto::Car;
 use Auto::Service;
 use Auto::User::Car::Service;
@@ -25,6 +26,8 @@ else {
 
 sub page {
   $Template_Tags{BODY} = read_file($CFG{Template_Dir} . "/user_car_service_create.html");
+  $Template_Tags{MENU} = Auto::Base::HTML::Menu->getMenu();
+
   $Template_Tags{CARS_LIST} = Auto::User::Car->getUsersCarList({
     criteria => { user_id => $CFG{_user}->id },
   });

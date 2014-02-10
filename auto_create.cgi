@@ -3,6 +3,7 @@
 use strict;
 use Include;
 
+use Auto::Base::HTML::Menu;
 use Auto::Car;
 
 my @fields = qw(make model year engine);
@@ -19,6 +20,8 @@ else {
 
 sub new_car_page {
   $Template_Tags{BODY} = read_file($CFG{Template_Dir} . "/auto_create.html");
+  $Template_Tags{MENU} = Auto::Base::HTML::Menu->getMenu();
+
   Auto::Car->populateForm({
     cgi    => $CGI_Obj,
     fields => \@fields,
