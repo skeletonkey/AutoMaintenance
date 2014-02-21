@@ -1,5 +1,4 @@
 package Auto::Base::HTML::Form;
-use base 'Auto::Base';
 
 sub getList {
   require Jundy::HTML::Select;

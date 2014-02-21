@@ -1,4 +1,5 @@
 package Auto::Car;
+use base 'Auto::Base::DB';
 use base 'Auto::Base::HTML::Form';
 
 __PACKAGE__->table('auto_car');

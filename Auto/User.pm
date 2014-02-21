@@ -1,5 +1,5 @@
 package Auto::User;
-use base 'Auto::Base';
+use base 'Auto::Base::DB';
 
 use Crypt::CBC;
 
@@ -24,7 +24,10 @@ __PACKAGE__->add_constructor(new_user_name_uniq => ' id != ? and user_name = ? '
   sub set_password {
     my $self = shift;
     my $password = shift;
-    return $password;
+
+    $self->password($password);
+    $self->update;
+    return 1;
     my $cipher = Crypt::CBC->new(-key => $_password_key);
     return $cipher->encrypt($password);
   }

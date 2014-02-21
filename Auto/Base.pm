@@ -1,11 +1,4 @@
 package Auto::Base;
-use base 'Class::DBI';
-
-Auto::Base->connection(
-  'dbi:mysql:' . $Auto::Config::DB::Database,
-  $Auto::Config::DB::Database_User,
-  $Auto::Config::DB::Database_Password
-);
 
 sub authorize {
   my $self    = shift;

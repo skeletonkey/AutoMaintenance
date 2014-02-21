@@ -41,6 +41,24 @@ my @menu = (
       },
     ],
   },
+  {
+    title => 'Account',
+    link  => '#',
+    menu  => [
+      {
+        title => 'Update Info',
+        link  => "account_update.cgi",
+      },
+      {
+        title => 'Update Password',
+        link  => "password_update.cgi",
+      },
+      {
+        title => 'Logout',
+        link  => "logout.cgi",
+      },
+    ],
+  },
 );
 
 sub getHeader {
