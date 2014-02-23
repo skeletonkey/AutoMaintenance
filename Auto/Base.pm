@@ -35,7 +35,7 @@ sub validate {
   foreach my $field (keys %$validation) {
     next unless $validation->{$field}{re};
     $tags->{ERROR} .= "Invalid Input for $field<BR>"
-      unless $cgi->param($field) =~ /${validation->{$field}{re}}/;
+      unless $cgi->param($field) =~ /${$validation->{$field}{re}}/;
   }
 
   return $tags->{ERROR} ? 0 : 1;
