@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 use strict;
-use Include;
+use Include::LoggedIn;
 
 use Auto::Base::HTML::Menu;
 use Auto::User;

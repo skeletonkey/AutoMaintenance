@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 use strict;
-use Include;
+use Include::LoggedIn;
 
 use Auto::Base::HTML::Menu;
 use Auto::Maintenance;
@@ -46,6 +46,7 @@ sub maintenance_add {
   });
 
   $Template_Tags{BODY} = read_file($CFG{Template_Dir} . "/maintenance_add.html");
+  $Template_Tags{CAR_NAME} = $user_car->name;
   $Template_Tags{MENU} = Auto::Base::HTML::Menu->getMenu();
 
   Auto::User::Car::Service->populateForm({
