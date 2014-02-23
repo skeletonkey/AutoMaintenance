@@ -2,7 +2,8 @@ package Auto::Maintenance;
 use base 'Auto::Base::DB';
 
 __PACKAGE__->table('auto_maintenance');
-__PACKAGE__->columns(All => qw(id user_car_id service_id mileage done_on));
+__PACKAGE__->columns(All => qw(id user_car_id service_id mileage done_on
+  comments));
 
 __PACKAGE__->has_a(service_id  => 'Auto::Service');
 __PACKAGE__->has_a(user_car_id => 'Auto::User::Car');
