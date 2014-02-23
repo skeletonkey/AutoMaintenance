@@ -55,7 +55,7 @@ my @menu = (
       },
       {
         title => 'Logout',
-        link  => "logout.cgi",
+        link  => "login.cgi?logout=1",
       },
     ],
   },
