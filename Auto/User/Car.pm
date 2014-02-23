@@ -15,6 +15,16 @@ __PACKAGE__->has_many(user_car_services  => 'Auto::User::Car::Service');
 sub car  { return shift->car_id;  }
 sub user { return shift->user_id; }
 
+sub name {
+  my $self = shift;
+
+  my $name = $self->nickname;
+
+  $name ||= join(' - ', map({ $self->car->{$_} } qw(make model year)));
+
+  return $name;
+}
+
 sub getUsersCarList {
   require Jundy::HTML::Select;
 
