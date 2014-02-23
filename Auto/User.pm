@@ -4,7 +4,7 @@ use base 'Auto::Base::DB';
 use Crypt::CBC;
 
 __PACKAGE__->table('auto_user');
-__PACKAGE__->columns(All => qw(id name password full_name active));
+__PACKAGE__->columns(All => qw(id name password full_name email active));
 
 __PACKAGE__->has_many(cars => 'Auto::User::Car', 'user_id');
 
