@@ -9,8 +9,10 @@ use Auto::User;
 my @fields = qw(full_name email);
 
 if ($CGI_Obj->param('submit') && validate()) {
-  $CFG{_user}->full_name($CGI_Obj->param('full_name'));
-  $CFG{_user}->email($CGI_Obj->param('email'));
+  $CFG{_user}->set(
+    email     => $CGI_Obj->param('email'),
+    full_name => $CGI_Obj->param('full_name'),
+  );
   $CFG{_user}->update;
   print $CGI_Obj->redirect($CFG{Scripts_URL} . 'dashboard.cgi');
 }
@@ -44,12 +46,6 @@ sub validate {
   }
   else {
     my @errors;
-
-    push(@errors, 'New password can not be the same as your current password')
-      if $CGI_Obj->param('current_password') eq $CGI_Obj->param('new_password');
-
-    push(@errors, 'New password did not match the confirmation')
-      if $CGI_Obj->param('new_password') ne $CGI_Obj->param('confirm_password');
 
     if (@errors) {
       $Template_Tags{ERROR} = join('<BR>', @errors);
