@@ -1,6 +1,6 @@
 package Auto::Car;
-use base 'Auto::Base::DB';
-use base 'Auto::Base::HTML::Form';
+use parent 'Auto::Base::DB';
+use parent 'Auto::Base::HTML::Form';
 
 __PACKAGE__->table('auto_car');
 __PACKAGE__->columns(All => qw(id make model year engine));

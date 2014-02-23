@@ -1,6 +1,6 @@
 package Auto::Service;
-use base 'Auto::Base::DB';
-use base 'Auto::Base::HTML::Form';
+use parent 'Auto::Base::DB';
+use parent 'Auto::Base::HTML::Form';
 
 __PACKAGE__->table('auto_service');
 __PACKAGE__->columns(All => qw(id name description months miles absolute));

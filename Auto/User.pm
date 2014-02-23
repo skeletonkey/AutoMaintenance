@@ -1,5 +1,5 @@
 package Auto::User;
-use base 'Auto::Base::DB';
+use parent 'Auto::Base::DB';
 
 use Crypt::CBC;
 

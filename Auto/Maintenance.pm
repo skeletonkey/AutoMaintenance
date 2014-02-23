@@ -1,5 +1,5 @@
 package Auto::Maintenance;
-use base 'Auto::Base::DB';
+use parent 'Auto::Base::DB';
 
 __PACKAGE__->table('auto_maintenance');
 __PACKAGE__->columns(All => qw(id user_car_id service_id mileage done_on

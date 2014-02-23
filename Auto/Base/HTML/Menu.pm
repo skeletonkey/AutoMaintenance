@@ -1,5 +1,5 @@
 package Auto::Base::HTML::Menu;
-use base 'Auto::Base';
+use parent 'Auto::Base';
 
 my @files = (
   '/auto/js/nav.js',
