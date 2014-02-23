@@ -1,7 +1,7 @@
   use File::Slurp;
   use lib '/home/jundy/modules', '/home/jundy/cgi-bin/configs';
 package Include::LoggedIn;
-use parent 'Include';
+#use parent 'Include';
 
 use strict;
 
@@ -35,7 +35,13 @@ our $Session = CGI::Session->new('driver:mysql', undef,
     Handle    => Auto::User->db_Main,
   }
 );
-$Session->expire('1w');
+if ($CGI_Obj->param('remember') || $Session->param('remember')) {
+  $Session->param(remember => 1);
+  $Session->expire('1w');
+}
+else {
+  $Session->expire('1h');
+}
 
 if ($Session->param('user_id')) {
   if ($ENV{SCRIPT_NAME} =~ /login\.cgi$/ && $CGI_Obj->param('logout')) {
