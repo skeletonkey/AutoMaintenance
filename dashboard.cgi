@@ -14,7 +14,7 @@ dashboard();
 sub dashboard {
   $Template_Tags{BODY} = read_file($CFG{Template_Dir} . "/dashboard.html");
   $Template_Tags{CARS} = get_cars();
-  $Template_Tags{LIST} = get_list($CGI_Obj->param('list'));
+  $Template_Tags{LIST} = get_list($CGI->param('list'));
   $Template_Tags{MENU} = Auto::Base::HTML::Menu->getMenu();
   
   $Template_Obj->display();

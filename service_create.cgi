@@ -8,16 +8,16 @@ use Auto::Service;
 
 my @fields = qw(name description months miles absolute);
 
-if ($CGI_Obj->param('submit')
-    && Auto::Service->validate({cgi => $CGI_Obj, tags => \%Template_Tags})) {
+if ($CGI->param('submit')
+    && Auto::Service->validate({cgi => $CGI, tags => \%Template_Tags})) {
   my %args;
   foreach (@fields) {
-    next unless $CGI_Obj->param($_);
-    $args{$_} = $CGI_Obj->param($_);
+    next unless $CGI->param($_);
+    $args{$_} = $CGI->param($_);
   }
   Auto::Service->find_or_create(\%args);
 
-  print $CGI_Obj->redirect($CFG{Scripts_URL} . 'dashboard.cgi');
+  print $CGI->redirect($CFG{Scripts_URL} . 'dashboard.cgi');
 }
 else {
   page();
@@ -28,12 +28,12 @@ sub page {
   $Template_Tags{MENU} = Auto::Base::HTML::Menu->getMenu();
 
   Auto::Car->populateForm({
-    cgi    => $CGI_Obj,
+    cgi    => $CGI,
     fields => \@fields,
     tags   => \%Template_Tags,
   });
 
-  $Template_Tags{ABSOLUTE_CHECKED} = $CGI_Obj->param('absolute') ? 'CHECKED' : '';
+  $Template_Tags{ABSOLUTE_CHECKED} = $CGI->param('absolute') ? 'CHECKED' : '';
   
   $Template_Obj->display();
 }

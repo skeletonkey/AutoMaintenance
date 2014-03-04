@@ -17,7 +17,7 @@ if (1) { #### SHOULD BE IN INCLUDE
 }
 
 our @ISA = qw( Exporter );
-our @EXPORT = qw(%CFG $CGI_Obj $Session $Template_Obj %Template_Tags);
+our @EXPORT = qw(%CFG $CGI $Session $Template_Obj %Template_Tags);
 
 use CGI;
 use CGI::Carp qw(fatalsToBrowser);
@@ -27,7 +27,7 @@ use Jundy::Template::Text::CGI;
 use Auto::User;
 
 our %CFG;
-our $CGI_Obj = CGI->new;
+our $CGI = CGI->new;
 
 our $Session = CGI::Session->new('driver:mysql', undef,
   {
@@ -35,7 +35,7 @@ our $Session = CGI::Session->new('driver:mysql', undef,
     Handle    => Auto::User->db_Main,
   }
 );
-if ($CGI_Obj->param('remember') || $Session->param('remember')) {
+if ($CGI->param('remember') || $Session->param('remember')) {
   $Session->param(remember => 1);
   $Session->expire('1w');
 }
@@ -44,10 +44,10 @@ else {
 }
 
 if ($Session->param('user_id')) {
-  if ($ENV{SCRIPT_NAME} =~ /login\.cgi$/ && $CGI_Obj->param('logout')) {
+  if ($ENV{SCRIPT_NAME} =~ /login\.cgi$/ && $CGI->param('logout')) {
     $Session->delete;
     $Session->flush;
-    print $CGI_Obj->redirect($CFG{Scripts_URL} . '/login.cgi');
+    print $CGI->redirect($CFG{Scripts_URL} . '/login.cgi');
     exit;
   }
   else {
@@ -59,7 +59,7 @@ if (!$CFG{_user}) {
   if (exists $ENV{SCRIPT_NAME}) {
     if (   $ENV{SCRIPT_NAME} !~ /login\.cgi$/
         && $ENV{SCRIPT_NAME} !~ /account_create\.cgi$/) {
-      print $CGI_Obj->redirect($CFG{Scripts_URL} . '/login.cgi');
+      print $CGI->redirect($CFG{Scripts_URL} . '/login.cgi');
       exit;
     }
   }
