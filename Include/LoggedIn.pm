@@ -56,9 +56,15 @@ if ($Session->param('user_id')) {
 }
 
 if (!$CFG{_user}) {
-  if (exists $ENV{SCRIPT_NAME} && $ENV{SCRIPT_NAME} !~ /login\.cgi$/) {
-    print $CGI_Obj->redirect($CFG{Scripts_URL} . '/login.cgi');
-    exit;
+  if (exists $ENV{SCRIPT_NAME}) {
+    if (   $ENV{SCRIPT_NAME} !~ /login\.cgi$/
+        && $ENV{SCRIPT_NAME} !~ /account_create\.cgi$/) {
+      print $CGI_Obj->redirect($CFG{Scripts_URL} . '/login.cgi');
+      exit;
+    }
+  }
+  else {
+    die("Inproper environment found");
   }
 }
 
