@@ -51,7 +51,16 @@ if ($Session->param('user_id')) {
     exit;
   }
   else {
-    $CFG{_user} = Auto::User->retrieve($Session->param('user_id'));
+    my @users = Auto::User->search(id => $Session->param('user_id'), active => 1);
+    if ($users[0]) {
+      $CFG{_user} = $users[0];
+    }
+    else {
+      $Session->delete;
+      $Session->flush;
+      print $CGI->redirect($CFG{Scripts_URL} . '/login.cgi');
+      exit;
+    }
   }
 }
 
