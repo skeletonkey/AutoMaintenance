@@ -8,7 +8,7 @@ __PACKAGE__->columns(All => qw(id name password full_name email active));
 
 __PACKAGE__->has_many(cars => 'Auto::User::Car', 'user_id');
 
-__PACKAGE__->add_constructor(new_user_name_uniq => ' id != ? and user_name = ? ');
+__PACKAGE__->add_constructor(new_name_not_uniq => ' id != ? and name = ? ');
 
 {
   my $_password_key = 'This is the tracker key';
