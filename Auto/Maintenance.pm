@@ -18,6 +18,7 @@ sub validate_definitions {
     done_on    => { re => '^\d{4}-\d{2}-\d{2}$' },
     mileage    => { re => '^\d+$' },
     service_id => { re => '^\d+$' },
+    comments   => { optional => 1 },
   };
 }
 
