@@ -2,6 +2,8 @@ package Auto::Base::DB;
 use parent 'Auto::Base';
 use parent 'Class::DBI';
 
+use Auto::Config::DB;
+
 Auto::Base::DB->connection(
   'dbi:mysql:' . $Auto::Config::DB::Database,
   $Auto::Config::DB::Database_User,

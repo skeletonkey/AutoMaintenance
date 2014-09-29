@@ -1,7 +1,7 @@
 #! /usr/bin/perl -ws
 
 use strict;
-use lib ('/home/jundy/cgi-bin/auto/', '/home/jundy/modules');
+use lib ('/home/jundy/cgi-bin/auto', '/home/jundy/cgi-bin/configs', '/home/jundy/modules');
 use vars qw($D $v);
 
 use Time::Local;
