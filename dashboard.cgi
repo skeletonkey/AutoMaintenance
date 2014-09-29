@@ -7,8 +7,10 @@ use HTML::Table;
 
 use Auto::Base::HTML::Menu;
 use Auto::Service;
+use Auto::User::Car;
 use Auto::User::Car::Service;
 
+actions();
 dashboard();
 
 sub dashboard {
@@ -18,6 +20,15 @@ sub dashboard {
   $Template_Tags{MENU} = Auto::Base::HTML::Menu->getMenu();
   
   $Template_Obj->display();
+}
+
+sub actions {
+  if ($CGI->param('new_mileage') && $CGI->param('new_mileage') > 0) {
+    my $car = Auto::User::Car->retrieve(user_id => $CFG{_user}->id, car_id => $CGI->param('car_id'));
+    $car->mileage($CGI->param('new_mileage'));
+    $car->update;
+    $CGI->delete('new_mileage');
+  }
 }
 
 sub get_list {
@@ -42,6 +53,23 @@ sub get_cars {
     $tbl->addRow(join(' - ', $car->make, $car->model, $car->year, $car->engine) . ' [' . $user_car->mileage . ']');
     $tbl->addRow(sprintf('<a href="%s?user_car_id=%d">Enter Maintenance</a>',
       $CFG{Scripts_URL} . '/maintenance_add.cgi', $user_car->id));
+    $tbl->addRow(
+        $CGI->start_form
+      . 'Update Mileage: '
+      . $CGI->textfield(
+          -name => 'new_mileage',
+          -size => 7,
+        )
+      . $CGI->submit(
+          -type  => 'submit',
+          -value => 'Update',
+        )
+      . $CGI->hidden(
+          -name  => 'car_id',
+          -value => $car->id,
+        )
+      . $CGI->end_form
+    );
     $tbl->addRow('Done On', 'Mileage', 'Type');
     foreach my $car_service (Auto::User::Car::Service->needed($user_car->id)) {
       $tbl->addRow('NEEDED', undef, $car_service->service->name);
@@ -52,6 +80,7 @@ sub get_cars {
     }
     $tbl->setCellColSpan(1, 1, $tbl->getTableCols);
     $tbl->setCellColSpan(2, 1, $tbl->getTableCols);
+    $tbl->setCellColSpan(3, 1, $tbl->getTableCols);
     $ret .= $tbl->getTable;
   }
 
