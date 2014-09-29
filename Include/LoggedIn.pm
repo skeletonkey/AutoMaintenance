@@ -47,7 +47,7 @@ if ($Session->param('user_id')) {
   if ($ENV{SCRIPT_NAME} =~ /login\.cgi$/ && $CGI->param('logout')) {
     $Session->delete;
     $Session->flush;
-    print $CGI->redirect($CFG{Scripts_URL} . '/login.cgi');
+    print $CGI->redirect($CFG{Scripts_URL} . 'login.cgi');
     exit;
   }
   else {
@@ -58,7 +58,7 @@ if ($Session->param('user_id')) {
     else {
       $Session->delete;
       $Session->flush;
-      print $CGI->redirect($CFG{Scripts_URL} . '/login.cgi');
+      print $CGI->redirect($CFG{Scripts_URL} . 'login.cgi');
       exit;
     }
   }
@@ -68,7 +68,7 @@ if (!$CFG{_user}) {
   if (exists $ENV{SCRIPT_NAME}) {
     if (   $ENV{SCRIPT_NAME} !~ /login\.cgi$/
         && $ENV{SCRIPT_NAME} !~ /account_create\.cgi$/) {
-      print $CGI->redirect($CFG{Scripts_URL} . '/login.cgi');
+      print $CGI->redirect($CFG{Scripts_URL} . 'login.cgi');
       exit;
     }
   }
