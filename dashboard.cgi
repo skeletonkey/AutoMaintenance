@@ -47,7 +47,7 @@ sub get_list {
 
 sub get_cars {
   my $ret;
-  foreach my $user_car (Auto::User::Car->search(user_id => $CFG{_user}->id)) {
+  foreach my $user_car (Auto::User::Car->search(user_id => $CFG{_user}->id, sell_date => undef)) {
     my $car = $user_car->car;
     my $tbl = HTML::Table->new();
     $tbl->addRow(join(' - ', $car->make, $car->model, $car->year, $car->engine) . ' [' . $user_car->mileage . ']');
