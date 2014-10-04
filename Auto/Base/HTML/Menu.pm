@@ -21,6 +21,10 @@ my @menu = (
         title => 'Add to Account',
         link  => "user_car_create.cgi",
       },
+      {
+        title => 'Remove from Account',
+        link  => "user_car_remove.cgi",
+      },
     ],
   },
   {
