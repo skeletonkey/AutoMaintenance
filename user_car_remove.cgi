@@ -9,9 +9,6 @@ use Auto::User::Car;
 
 my @fields = ('car_id');
 if ($CGI->param('submit') && validate()) {
-  use Erik qw(off);
-  Erik::sanity("car_id => " . $CGI->param('car_id'));
-  Erik::sanity("user_id => " . $CFG{_user}->id);
   my $user_car = Auto::User::Car->retrieve(car_id  => $CGI->param('car_id'),
     user_id => $CFG{_user}->id,
   ) || die("Auto::User::Car not found (" . $CGI->param('car_id') . '|' . $CFG{_user}->id . ")\n");
