@@ -22,7 +22,7 @@ sub needed {
     my ($maint) = Auto::Maintenance->search(
       user_car_id => $user_car_service->user_car_id,
       service_id  => $user_car_service->service_id,
-      { order_by => 'mileage' }
+      { order_by => 'mileage desc' }
     );
 
     my $maint_mileage = $maint ? $maint->mileage : 0;
