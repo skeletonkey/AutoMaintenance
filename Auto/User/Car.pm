@@ -20,7 +20,7 @@ sub name {
 
   my $name = $self->nickname;
 
-  $name ||= join(' - ', map({ $self->car->{$_} } qw(make model year)));
+  $name ||= join(' - ', map({ $self->car->$_ } qw(make model year)));
 
   return $name;
 }
